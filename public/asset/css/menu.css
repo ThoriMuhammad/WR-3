@@ -1,0 +1,44 @@
+
+/* Gaya CSS untuk tampilan desktop */
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    }
+    header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+    nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    }
+    nav li {
+    margin-right: 20px;
+    }
+    nav a {
+    color: #fff;
+    text-decoration: none;
+    }
+    main {
+    display: flex;
+    padding: 20px;
+    }
+    .sidebar {
+    background-color: #dee2e6;
+    padding: 20px;
+    width: 220px;
+    margin-right: 20px;
+    }
+    .content {
+    flex: 1;
+    }
+    section {
+    margin-bottom: 30px;
+    }
