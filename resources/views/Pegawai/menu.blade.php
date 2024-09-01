@@ -20,15 +20,24 @@
     </form>
    
     <div class="menu"> 
-        <div class="dropdown">
-        <a href="" class="dropdown-toggle">Beranda</a>
-        <div class="dropdown-content">
-            <a href="">Profil</a>
-          </div>
-        </div>
-        <a href="">Profil</a>
-        <a href="">Data Pegawai</a>
-        <a href="">Tentang Kami</a>   
+    <a href="">
+      <li class="dropdown">Beranda
+        <ul class="dropdown-content">
+          <a href="">Profil</a>
+        </ul>
+      </li>
+    </a>
+        <a href="">Program Kerja</a>
+        <a href="">
+          <li class="dropdown">Kerjasama
+        <ul class="dropdown-content">
+          <a href="">Panduan Kerjasama</a>
+          <a href="">Institut</a>
+          <a href="">Fakultas</a>
+          </ul>
+        </li>
+      </a>
+        <a href="">Kemahasiswaan</a>   
       </div>
       <i class="bi bi-box-arrow-right fs-3"></i>
     </nav>
