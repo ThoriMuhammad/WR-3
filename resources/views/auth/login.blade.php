@@ -16,7 +16,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6 ">
-            <img src="{{ asset('assets/img/login.png') }}" alt="MoneyWise App" class="img-fluid">
+            <img src="{{ asset('assets/img/itylogo.png') }}" alt="MoneyWise App" class="img-fluid">
         </div>
         <div class="col-lg-6 mt-5">
             <div class="form-container mt-5">
