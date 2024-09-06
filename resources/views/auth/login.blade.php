@@ -16,7 +16,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6 ">
-            <img src="{{ asset('assets/img/itylogo.png') }}" alt="MoneyWise App" class="img-fluid">
+            <img src="{{ asset('assets/img/itylogo.png') }}" alt="" class="img-fluid">
         </div>
         <div class="col-lg-6 mt-5">
             <div class="form-container mt-5">
@@ -32,7 +32,7 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div>
-                        <label for="email" class="form-label">{{ __('Email') }}</label>
+                        <label for="email" class="form-label">{{ __('Email/Username') }}</label>
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="username" autofocus>
                         @error('email')
                             <p class="text-danger">{{ $message }}</p>
@@ -55,7 +55,7 @@
                     <div class="d-flex justify-content-end mt-4">
                         <button type="submit" class="btn btn-ungu btn-block">Login</button>
                     </div>
-                    <p>Don't have an account? <a href="{{ route('register') }}">Sign up here.</a></p>
+                    <!-- <p>Don't have an account? <a href="{{ route('register') }}">Sign up here.</a></p> -->
 
 
                 </form>
