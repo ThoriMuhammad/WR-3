@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\AdminAuthController;
+use App\Http\Controllers\DocumentController;
+
 
 
 Route::get('/', function () {
@@ -17,6 +19,12 @@ Route::get('/profil', function (){
 Route::get('/proker', function (){
     return view('admin.programkerja');
 });
+Route::resource('documents', DocumentController::class);
+Route::get('/documents/{document}/download', [DocumentController::class, 'download'])->name('documents.download');
+
+// Route::get('/documents/create', [DocumentController::class, 'create'])->name('documents.create');
+// Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
+
 Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/login', [AdminAuthController::class, 'login']);
 Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');

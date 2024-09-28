@@ -53,7 +53,7 @@
               <li class="dropdown">
                 <a href="" class="menu-item" data-page="Lainnya">LAINNYA</a>
                 <div class="dropdown-content">
-                    <a href="">UNDUH DOKUMEN</a>
+                    <a href="{{ url('documents') }}">UNDUH DOKUMEN</a>
                     <a href="">KONTAK</a>
                 </div>
               </li>

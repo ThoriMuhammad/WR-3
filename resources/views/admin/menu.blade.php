@@ -34,6 +34,7 @@
             <div class="teks">
                 <h3>Judul Berita 1</h3>
                 <p>Ini adalah deskripsi singkat atau konten berita 1.</p>
+                <a href="#" class="card-link text-center">Selengkapnya</a>
             </div>
         </div>
 
@@ -44,6 +45,7 @@
             <div class="teks">
                 <h3>Judul Berita 2</h3>
                 <p>Ini adalah deskripsi singkat atau konten berita 2.</p>
+                <a href="#" class="card-link text-center">Selengkapnya</a>
             </div>
         </div>
 
@@ -54,6 +56,7 @@
             <div class="teks">
                 <h3>Judul Berita 3</h3>
                 <p>Ini adalah deskripsi singkat atau konten berita 3.</p>
+                <a href="#" class="card-link text-center">Selengkapnya</a>
             </div>
         </div>
     </div>
