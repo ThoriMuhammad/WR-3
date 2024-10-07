@@ -26,6 +26,7 @@
             <a href="{{ url('menu') }}" class="menu-item" data-page="menu">BERANDA</a>
             <div class="dropdown-content">
                     <a href="{{ url('profil') }}">PROFIL</a>
+                    <a href="{{ url('news-management') }}">BERITA</a>
             </div>
           </li>
 

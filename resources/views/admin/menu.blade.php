@@ -20,45 +20,62 @@
         </div>
     </div>
 
-    <div  style="margin-top: 100px;">
-
-    <div class="kotak-container">
-    <div class="header-kotak">
-        <a href="" class="btn btn-success">Tambah Berita</a>
-        <h3 class="text-center"><strong>Berita & Agenda</strong></h3> 
-    </div>
-        <div class="kotak">
-            <div class="gambar">
-            <img src="{{ asset('assets/img/menu/5.jpeg') }}" alt="ITY Image 5">
+    <div style="margin-top: 100px;">
+        <div class="kotak-container">
+            <div class="header-kotak">
+                <h3 class="text-center"><strong>Berita & Agenda</strong></h3>
             </div>
-            <div class="teks">
-                <h3>Judul Berita 1</h3>
-                <p>Ini adalah deskripsi singkat atau konten berita 1.</p>
-                <a href="#" class="card-link text-center">Selengkapnya</a>
-            </div>
-        </div>
-
-        <div class="kotak">
-            <div class="gambar">
-                <img src="{{ asset('assets/img/menu/5.jpeg') }}" alt="ITY Image 5">
-            </div>
-            <div class="teks">
-                <h3>Judul Berita 2</h3>
-                <p>Ini adalah deskripsi singkat atau konten berita 2.</p>
-                <a href="#" class="card-link text-center">Selengkapnya</a>
-            </div>
-        </div>
-
-        <div class="kotak">
-            <div class="gambar">
-                <img src="{{ asset('assets/img/menu/5.jpeg') }}" alt="ITY Image 5">
-            </div>
-            <div class="teks">
-                <h3>Judul Berita 3</h3>
-                <p>Ini adalah deskripsi singkat atau konten berita 3.</p>
-                <a href="#" class="card-link text-center">Selengkapnya</a>
-            </div>
+            
+            @if(isset($news) && $news->count() > 0)
+                @foreach($news as $item)
+                    <div class="kotak">
+                        <div class="gambar">
+                            <img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->title }}">
+                        </div>
+                        <div class="teks">
+                            <h4>{{ $item->title }}</h4>
+                            <a href="{{ route('news.show', $item->id) }}" class="card-link text-center read-more" data-id="{{ $item->id }}">Selengkapnya</a>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <p>Belum ada berita yang ditambahkan.</p>
+            @endif
         </div>
     </div>
 
+    <!-- <div class="modal fade" id="newsModal" tabindex="-1" role="dialog" aria-labelledby="newsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newsModalLabel">Detail Berita</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="newsDetail"> -->
+                    <!-- News detail will be loaded here -->
+                <!-- </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.read-more').on('click', function(e) {
+            e.preventDefault();
+            var newsId = $(this).data('id');
+            $.ajax({
+                url: '/news/' + newsId,
+                method: 'GET',
+                success: function(response) {
+                    $('#newsDetail').html(response);
+                    $('#newsModal').modal('show');
+                }
+            });
+        });
+    });
+    </script> -->
 @endsection
