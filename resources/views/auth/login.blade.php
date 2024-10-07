@@ -33,7 +33,7 @@
                     @csrf
                     <div>
                         <label for="email" class="form-label">{{ __('Email/Username') }}</label>
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="username" autofocus>
+                        <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="username" autofocus>
                         @error('email')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror

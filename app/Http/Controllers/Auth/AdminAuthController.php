@@ -1,7 +1,5 @@
 <?php
 
-// app/Http/Controllers/AdminAuthController.php
-// app/Http/Controllers/AdminAuthController.php
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -19,24 +17,36 @@ class AdminAuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'login' => 'required', // Change 'email' to 'login'
             'password' => 'required',
         ]);
 
-        $loginField = filter_var($request->input('email'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $login = $request->input('login');
+        $password = $request->input('password');
+
+        $loginType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
         $credentials = [
-            $loginField => $request->input('email'),
-            'password' => $request->input('password'),
+            $loginType => $login,
+            'password' => $password,
         ];
 
-        // Cek kredensial
+        
         if (Auth::guard('admin')->attempt($credentials)) {
+            $request->session()->regenerate();
             return redirect()->intended('/menu');
         }
 
         return back()->withErrors([
-            'email' => 'Email, username, atau password salah.',
-        ]);
+            'login' => 'Kredensial yang diberikan tidak cocok dengan data kami.',
+        ])->withInput($request->only('login'));
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('admin')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }
