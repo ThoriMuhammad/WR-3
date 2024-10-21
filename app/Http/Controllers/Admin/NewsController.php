@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -14,7 +15,7 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::latest()->paginate(10);
-        return view('news.news_management', compact('news'));
+        return view('admin.news.news_management', compact('news'));
     }
 
     /**
@@ -22,7 +23,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('news.createnews');
+        return view('admin.news.createnews');
     }
 
     /**
@@ -44,7 +45,7 @@ class NewsController extends Controller
             'image_path' => $imagePath,
         ]);
 
-        return redirect()->route('news.index')->with('success', 'Berita berhasil ditambahkan.');
+        return redirect()->route('admin.news.index')->with('success', 'Berita berhasil ditambahkan.');
     }
 
     /**
@@ -54,25 +55,49 @@ class NewsController extends Controller
     {
         $news = News::findOrFail($id);
         if (request()->ajax()) {
-            return view('news.show', compact('news'))->render();
+            return view('admin.news.show', compact('news'))->render();
         }
-        return view('news.show', compact('news'));
+        return view('admin.news.show', compact('news'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(News $news)
     {
-        //
+        return view('admin.news.editnews', compact('news'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, News $news)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+    
+        $news->title = $request->title;
+        $news->content = $request->content;
+    
+        // Handle image update
+        if ($request->hasFile('image')) {
+            // Delete old image
+            if ($news->image_path) {
+                Storage::delete('public/' . $news->image_path);
+            }
+    
+            // Store new image
+            $imagePath = $request->file('image')->store('news_images', 'public');
+            $news->image_path = $imagePath;
+        }
+    
+        $news->save();
+    
+        return redirect()->route('admin.news.index')
+            ->with('success', 'News updated successfully');
     }
 
     /**
@@ -90,6 +115,6 @@ class NewsController extends Controller
         // Hapus berita dari database
         $news->delete();
 
-        return redirect()->route('news.index')->with('success', 'Berita berhasil dihapus.');
+        return redirect()->route('admin.news.index')->with('success', 'Berita berhasil dihapus.');
     }
 }

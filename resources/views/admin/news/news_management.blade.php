@@ -1,19 +1,19 @@
-@extends('layouts.app')
+@extends('layouts.adminlayouts')
 
-@section('title', 'Manajemen Berita')
+@section('title', 'News Management')
 
 @section('content')
 <div class="container">
-    <h1>Manajemen Berita</h1>
-    <a href="{{ route('news.create') }}" class="btn btn-primary mb-3">Tambah Berita Baru</a>
+    <h1 class="text-center">News Management</h1>
+    <a href="{{ route('admin.news.create') }}" class="btn btn-success mb-3">Add New News</a>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Judul</th>
-                <th>Gambar</th>
+                <th>Title</th>
+                <th>Image</th>
                 <th>Link</th>
-                <th>Aksi</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,10 +21,10 @@
                 <tr>
                     <td>{{ $item->title }}</td>
                     <td><img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->title }}" width="100"></td>
-                    <td><a href="{{ route('news.show', $item->id) }}">Lihat Berita</a></td>
+                    <td><a href="{{ route('admin.news.show', $item->id) }}">Lihat Berita</a></td>
                     <td>
-                        <a href="{{ route('news.edit', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                        <form action="{{ route('news.destroy', $item->id) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('admin.news.edit', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <form action="{{ route('admin.news.destroy', $item->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">Delete</button>

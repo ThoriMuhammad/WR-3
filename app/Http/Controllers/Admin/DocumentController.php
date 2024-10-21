@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +17,7 @@ class DocumentController extends Controller
     {
         $documents = Document::all();
         $documents = Document::orderBy('no')->get();
-        return view('documents.dokumen', compact('documents'));
+        return view('admin.documents.admdokumen', compact('documents'));
     }
 
     /**
@@ -24,7 +25,7 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        return view('documents.createdokumen');
+        return view('admin.documents.createdokumen');
     }
 
     /**
@@ -53,7 +54,7 @@ class DocumentController extends Controller
 
     $document->save();
 
-    return redirect()->route('documents.index')->with('success', 'Document uploaded successfully');
+    return redirect()->route('admin.documents.index')->with('success', 'Document uploaded successfully');
     }
 
     /**
@@ -69,7 +70,7 @@ class DocumentController extends Controller
      */
     public function edit(Document $document)
     {
-        return view('documents.editdokumen', compact('document'));
+        return view('admin.documents.editdokumen', compact('document'));
     }
 
     /**
@@ -108,7 +109,7 @@ class DocumentController extends Controller
         
         $document->save();
 
-        return redirect()->route('documents.index')->with('success', 'Document updated successfully');
+        return redirect()->route('admin.documents.index')->with('success', 'Document updated successfully');
     }
 
     /**
@@ -124,24 +125,25 @@ class DocumentController extends Controller
         
         $document->delete();
     
-        return redirect()->route('documents.index')->with('success', 'Document deleted successfully');
+        return redirect()->route('admin.documents.index')->with('success', 'Document deleted successfully');
     }
 
     public function download(Document $document)
     {
-        // $document = Document::findOrFail($id);
+        try {
+            if (!$document->file_path || !Storage::disk('public')->exists($document->file_path)) {
+                return redirect()->back()->with('error', 'File not found');
+            }
     
-        if (!$document->file_path) {
-            return redirect()->back()->with('error', 'No file available for download');
+            $originalExtension = pathinfo($document->file_path, PATHINFO_EXTENSION);
+            $downloadName = Str::slug($document->nama) . '.' . $originalExtension;
+    
+            return Storage::disk('public')->download(
+                $document->file_path, 
+                $downloadName
+            );
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error downloading file: ' . $e->getMessage());
         }
-    
-        $originalExtension = pathinfo($document->file_path, PATHINFO_EXTENSION);
-        $downloadName = Str::slug($document->nama) . '.' . $originalExtension;
-    
-        return Storage::disk('public')->download(
-            $document->file_path, 
-            $downloadName, 
-            ['Content-Type' => $document->mime_type]
-        );
     }
 }

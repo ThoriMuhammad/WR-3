@@ -1,19 +1,19 @@
-@extends('layouts.app')
+@extends('layouts.adminlayouts')
 
-@section('title', 'dokumen') <!-- Menentukan judul halaman -->
+@section('title', 'Admin Dokumen') <!-- Menentukan judul halaman -->
 @section('additional_css')
 
 @endsection
 
 @section('content')
-<h1 class="text-center">Dokumen</h1>
-<a href="{{ route('documents.create') }}" class="btn btn-success">Add New Document</a>
+<h1 class="text-center">Document</h1>
+<a href="{{ route('admin.documents.create') }}" class="btn btn-success">Add New Document</a>
 
 <table class="table mt-3">
     <thead>
         <tr>
             <th>No</th>
-            <th>Nama File</th>
+            <th>Name File</th>
             <th>Link/File</th>
             <th>Updated</th>
             <th>Actions</th>
@@ -25,8 +25,8 @@
             <td>{{ $document->formatted_no }}</td>
             <td>{{ $document->nama }}</td>
             <td>
-                @if($document->file_path)
-                    <a href="{{ route('documents.download', $document) }}" class="btn btn-sm btn-primary">Download File</a>
+                 @if($document->file_path)
+                    <a href="{{ route('admin.documents.download', $document) }}" class="btn btn-sm btn-primary">Download File</a>
                 @elseif($document->link)
                     <a href="{{ $document->link }}" target="_blank" class="btn btn-sm btn-primary">View Document</a>
                 @else
@@ -35,11 +35,8 @@
             </td>
             <td>{{ $document->updated_at }}</td>
             <td>
-                <!-- @if($document->file_path)
-                    <a href="{{ route('documents.download', $document) }}" class="btn btn-sm btn-primary">Download</a>
-                @endif -->
-                <a href="{{ route('documents.edit', $document->id) }}" class="btn btn-sm btn-secondary">Edit</a>
-                <form action="{{ route('documents.destroy', $document->id) }}" method="POST" class="d-inline">
+                <a href="{{ route('admin.documents.edit', $document->id) }}" class="btn btn-sm btn-secondary">Edit</a>
+                <form action="{{ route('admin.documents.destroy', $document->id) }}" method="POST" class="d-inline">
                     @csrf
                     @method('DELETE')
                     <button type="button" class="btn btn-sm btn-danger delete-btn">Delete</button>               

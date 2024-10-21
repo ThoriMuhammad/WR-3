@@ -1,9 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.adminlayouts')
+
+@section('title', 'Edit Document')
 
 @section('content')
 <div class="container">
     <h2>Edit Document</h2>
-    <form action="{{ route('documents.update', $document->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.documents.update', $document->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">
@@ -47,6 +49,7 @@
         </div>
         <div class="mt-3">
             <button type="submit" class="btn btn-primary">Update Document</button>
+            <a href="{{ route('admin.documents.index') }}" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 </div>

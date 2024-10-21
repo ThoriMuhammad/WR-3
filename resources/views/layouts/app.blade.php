@@ -22,19 +22,19 @@
     </div>
     <div class="nav-right">
         <ul class="menu">
-          <li class="dropdown">
-            <a href="{{ url('menu') }}" class="menu-item" data-page="menu">BERANDA</a>
-            <div class="dropdown-content">
-                    <a href="{{ url('profil') }}">PROFIL</a>
-                    <a href="{{ url('news-management') }}">BERITA</a>
-            </div>
-          </li>
+            <li class="dropdown">
+              <a href="{{ url('menu') }}" class="menu-item" data-page="menu">BERANDA</a>
+              <div class="dropdown-content">
+                      <a href="{{ url('profil') }}">PROFIL</a>
+                      <!-- <a href="{{ url('news-management') }}">BERITA</a> -->
+              </div>
+            </li>
 
-          <li>
-            <a href="{{ url('proker') }}" class="menu-item" data-page="proker">PROGRAM KERJA</a>
-          </li>
+            <li>
+              <a href="{{ url('proker') }}" class="menu-item" data-page="proker">PROGRAM KERJA</a>
+            </li>
 
-          <li class="dropdown">
+            <li class="dropdown">
                 <a href="#" class="menu-item" data-page="kerjasama">KERJASAMA</a>
                 <div class="dropdown-content">
                     <a href="">PANDUAN KERJASAMA</a>
@@ -54,13 +54,11 @@
               <li class="dropdown">
                 <a href="" class="menu-item" data-page="Lainnya">LAINNYA</a>
                 <div class="dropdown-content">
-                    <a href="{{ url('documents') }}">UNDUH DOKUMEN</a>
+                    <a href="{{ route('user.documents.index') }}">UNDUH DOKUMEN</a>
                     <a href="">KONTAK</a>
                 </div>
               </li>
         </ul>
-        </ul>
-        <i class="bi bi-box-arrow-right fs-3"></i>
     </div>
 </nav>
 
@@ -72,5 +70,8 @@
     @yield('scripts')
     <script src="{{ asset('assets/js/script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @stack('scripts')
+    @stack('styles')
   </body>
 </html>

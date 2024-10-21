@@ -12,8 +12,8 @@ class AdminNewsController extends Controller
      */
     public function index()
     {
-        $news = News::latest()->paginate(10);
-        return view('admin.menu', compact('news'));
+        $news = News::latest()->paginate(6);
+        return view('user.menu', compact('news'));
     }
 
     /**
@@ -35,9 +35,18 @@ class AdminNewsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $news = News::findOrFail($id);
+        if(request()->ajax()) {
+            return response()->json([
+                'title' => $news->title,
+                'content' => $news->content,
+                'image' => asset('storage/' . $news->image_path),
+                'date' => $news->created_at->format('d M Y H:i')
+            ]);
+        }
+        return view('user.menu', compact('news'));
     }
 
     /**
